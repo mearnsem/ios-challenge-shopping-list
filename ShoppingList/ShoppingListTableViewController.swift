@@ -10,10 +10,6 @@ import UIKit
 
 class ShoppingListTableViewController: UITableViewController {
 
-    // MARK: - IBOutlets & Properties
-    
-
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -23,6 +19,7 @@ class ShoppingListTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         tableView.reloadData()
+
     }
     
     // MARK: - IBActions
@@ -36,7 +33,6 @@ class ShoppingListTableViewController: UITableViewController {
         alertController.addAction(addAction)
         self.navigationController?.presentViewController(alertController, animated: true, completion: nil)
     }
-
 
     // MARK: - Table view data source
 

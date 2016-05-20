@@ -17,8 +17,11 @@ class ItemController {
         
     }
     
+
+    
     func addItem(item: Item) {
         
+        saveToPersistentStore()
     }
     
     func updateItem(item: Item, name: String) {

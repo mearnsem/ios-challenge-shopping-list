@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Shopping List-->
@@ -14,25 +16,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" rowHeight="50" id="rOb-jf-BsH">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" rowHeight="50" id="rOb-jf-BsH" customClass="ItemTableViewCell" customModule="ShoppingList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rOb-jf-BsH" id="WsY-Lj-GdI">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="49"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMr-6d-aTk">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMr-6d-aTk">
                                             <rect key="frame" x="8" y="14" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neu-Yd-ICv">
-                                            <rect key="frame" x="546" y="10" width="46" height="30"/>
-                                            <state key="normal" title="Button"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neu-Yd-ICv">
+                                            <rect key="frame" x="567" y="12" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="LUy-Tp-rF8"/>
+                                                <constraint firstAttribute="width" secondItem="neu-Yd-ICv" secondAttribute="height" multiplier="1:1" id="dYA-qd-pAM"/>
+                                                <constraint firstAttribute="width" constant="25" id="sMY-tw-bD4"/>
+                                            </constraints>
+                                            <state key="normal" image="incomplete"/>
+                                            <connections>
+                                                <action selector="buttonTapped:" destination="rOb-jf-BsH" eventType="touchUpInside" id="ZdD-pX-kf4"/>
+                                            </connections>
                                         </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="neu-Yd-ICv" secondAttribute="bottom" constant="4" id="6d3-Ce-1GD"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="wMr-6d-aTk" secondAttribute="trailing" constant="542" id="I0P-8H-FyN"/>
+                                        <constraint firstItem="neu-Yd-ICv" firstAttribute="top" secondItem="WsY-Lj-GdI" secondAttribute="topMargin" constant="4" id="V65-EI-2ty"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="wMr-6d-aTk" secondAttribute="bottom" constant="6" id="Yjb-fq-sxp"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="wMr-6d-aTk" secondAttribute="leading" id="jPu-ZT-C8T"/>
+                                        <constraint firstItem="wMr-6d-aTk" firstAttribute="top" secondItem="WsY-Lj-GdI" secondAttribute="topMargin" constant="6" id="ofC-Pm-x39"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="neu-Yd-ICv" secondAttribute="trailing" id="snB-mc-wcJ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="buttonTapped" destination="neu-Yd-ICv" id="ZxS-Ye-Qxu"/>
+                                    <outlet property="itemTextLabel" destination="wMr-6d-aTk" id="SjJ-xX-wp6"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -71,4 +94,7 @@
             <point key="canvasLocation" x="638" y="400"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="incomplete" width="512" height="512"/>
+    </resources>
 </document>

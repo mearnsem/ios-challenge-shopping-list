@@ -11,11 +11,10 @@ import CoreData
 
 class Item: NSManagedObject {
 
-    convenience init(name: String, isComplete: Bool, context: NSManagedObjectContext) {
-        guard let context =  else { return }
+    convenience init?(name: String, isComplete: Bool, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
+        guard let entity = NSEntityDescription.entityForName("Item", inManagedObjectContext: context) else {return nil}
         
-        let moc = Stack.sharedStack.managedObjectContext
-        let entity = 
+        self.init(entity: entity, insertIntoManagedObjectContext: context)
         
         self.name = name
         self.isComplete = isComplete
