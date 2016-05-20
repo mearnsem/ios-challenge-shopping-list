@@ -11,8 +11,8 @@ import CoreData
 
 class Item: NSManagedObject {
 
-    convenience init?(name: String, isComplete: Bool, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
-        guard let entity = NSEntityDescription.entityForName("Item", inManagedObjectContext: context) else {return nil}
+    convenience init(name: String, isComplete: Bool, context: NSManagedObjectContext = Stack.sharedStack.managedObjectContext) {
+        let entity = NSEntityDescription.entityForName("Item", inManagedObjectContext: context)!
         
         self.init(entity: entity, insertIntoManagedObjectContext: context)
         

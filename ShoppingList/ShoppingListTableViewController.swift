@@ -10,6 +10,7 @@ import UIKit
 
 class ShoppingListTableViewController: UITableViewController {
 
+    var item: Item?
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -28,7 +29,13 @@ class ShoppingListTableViewController: UITableViewController {
         let alertController = UIAlertController(title: "Add Item", message: "Add an item to your shopping list", preferredStyle: .Alert)
         alertController.addTextFieldWithConfigurationHandler { (textField) in Void() }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        let addAction = UIAlertAction(title: "Add", style: .Default, handler: nil)
+        let addAction = UIAlertAction(title: "Add", style: .Default) { (actionController) in
+            guard let item = self.item else { return }
+            ItemController.sharedController.addItem(textFields.first, isComplete: false)
+            ItemController.sharedController.saveToPersistentStore()
+            
+            print(ItemController.sharedController.items.count)
+        }
         alertController.addAction(cancelAction)
         alertController.addAction(addAction)
         self.navigationController?.presentViewController(alertController, animated: true, completion: nil)
