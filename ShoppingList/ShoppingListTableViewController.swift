@@ -10,6 +10,12 @@ import UIKit
 
 class ShoppingListTableViewController: UITableViewController {
 
+    // MARK: - IBOutlets & Properties
+    
+
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -18,24 +24,39 @@ class ShoppingListTableViewController: UITableViewController {
         super.viewWillAppear(true)
         tableView.reloadData()
     }
+    
+    // MARK: - IBActions
+    
+    @IBAction func addButtonPressed(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Add Item", message: "Add an item to your shopping list", preferredStyle: .Alert)
+        alertController.addTextFieldWithConfigurationHandler { (textField) in Void() }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let addAction = UIAlertAction(title: "Add", style: .Default, handler: nil)
+        alertController.addAction(cancelAction)
+        alertController.addAction(addAction)
+        self.navigationController?.presentViewController(alertController, animated: true, completion: nil)
+    }
+
 
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return ItemController.sharedController.items.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath)
 
-        // Configure the cell...
+        let item = ItemController.sharedController.items[indexPath.row]
+        cell.textLabel?.text = item.name
 
         return cell
     }
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
+            let item = ItemController.sharedController.items[indexPath.row]
+            ItemController.sharedController.deleteItem(item)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }

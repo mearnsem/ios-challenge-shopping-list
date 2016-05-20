@@ -11,7 +11,7 @@ import CoreData
 
 class ItemController {
     static let sharedController = ItemController()
-    var item: [Item] = []
+    var items: [Item] = []
     
     init() {
         

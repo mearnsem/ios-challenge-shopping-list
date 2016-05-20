@@ -17,7 +17,6 @@
 		40A004581CEF62730086D5CB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A004561CEF62730086D5CB /* Item.swift */; };
 		40A0045A1CEF62D60086D5CB /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A004591CEF62D60086D5CB /* Stack.swift */; };
 		40A0045E1CEF63710086D5CB /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A0045D1CEF63710086D5CB /* ItemController.swift */; };
-		40A004611CEF664D0086D5CB /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A004601CEF664D0086D5CB /* ItemTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		40A004561CEF62730086D5CB /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		40A004591CEF62D60086D5CB /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		40A0045D1CEF63710086D5CB /* ItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
-		40A004601CEF664D0086D5CB /* ItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +90,6 @@
 		40A0045C1CEF635A0086D5CB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				40A004601CEF664D0086D5CB /* ItemTableViewCell.swift */,
 				40A004501CEF60140086D5CB /* ShoppingListTableViewController.swift */,
 			);
 			name = Views;
@@ -181,7 +178,6 @@
 				40A004581CEF62730086D5CB /* Item.swift in Sources */,
 				1A4A231D1CCA8D2C003A4350 /* AppDelegate.swift in Sources */,
 				40A004511CEF60140086D5CB /* ShoppingListTableViewController.swift in Sources */,
-				40A004611CEF664D0086D5CB /* ItemTableViewCell.swift in Sources */,
 				40A004571CEF62730086D5CB /* Item+CoreDataProperties.swift in Sources */,
 				40A0045A1CEF62D60086D5CB /* Stack.swift in Sources */,
 				40A004541CEF61440086D5CB /* Model.xcdatamodeld in Sources */,
