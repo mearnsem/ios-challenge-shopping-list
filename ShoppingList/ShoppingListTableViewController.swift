@@ -14,11 +14,13 @@ class ShoppingListTableViewController: UITableViewController, ItemTableViewCellD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         tableView.reloadData()
+        
     }
 
     @IBAction func addButtonPressed(sender: AnyObject) {
@@ -33,13 +35,13 @@ class ShoppingListTableViewController: UITableViewController, ItemTableViewCellD
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         alertController.addAction(cancelAction)
         
-        let addAction = UIAlertAction(title: "Add", style: .Default) { (action) in
-            guard let name = itemTextField!.text else {return}
+        let addAction = UIAlertAction(title: "Add", style: .Default) { (_) in
+            guard let name = itemTextField?.text else {return}
             ItemController.sharedController.addItem(name, isComplete: false)
             self.tableView.reloadData()
+            print("Items: \(ItemController.sharedController.items.count)")
         }
         alertController.addAction(addAction)
-        
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
@@ -63,6 +65,10 @@ class ShoppingListTableViewController: UITableViewController, ItemTableViewCellD
         cell.delegate = self
 
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Items"
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
