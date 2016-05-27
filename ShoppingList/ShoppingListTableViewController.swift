@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ShoppingListTableViewController: UITableViewController {
+class ShoppingListTableViewController: UITableViewController, ItemTableViewCellDelegate {
 
+    var item: Item?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -20,21 +22,46 @@ class ShoppingListTableViewController: UITableViewController {
     }
 
     @IBAction func addButtonPressed(sender: AnyObject) {
+        var itemTextField: UITextField?
+        
+        let alertController = UIAlertController(title: "Add Item", message: "Add an item to your shopping list.", preferredStyle: .Alert)
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "Item name"
+            itemTextField = textField
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let addAction = UIAlertAction(title: "Add", style: .Default) { (action) in
+            guard let name = itemTextField!.text else {return}
+            ItemController.sharedController.addItem(name, isComplete: false)
+            self.tableView.reloadData()
+        }
+        alertController.addAction(addAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func updateButtonToggleValueChanged(sender: ItemTableViewCell) {
+        if let item = item {
+            ItemController.sharedController.buttonToggleValueChanged(item)
+        }
         
     }
+    
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ItemController.sharedController.items.count
     }
-
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as? ItemTableViewCell
 
         let item = ItemController.sharedController.items[indexPath.row]
         cell?.updateWithItem(item)
-        
+        cell?.delegate = self
 
         return cell ?? ItemTableViewCell()
     }
@@ -43,7 +70,9 @@ class ShoppingListTableViewController: UITableViewController {
         if editingStyle == .Delete {
             let item = ItemController.sharedController.items[indexPath.row]
             ItemController.sharedController.deleteItem(item)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+//            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
  

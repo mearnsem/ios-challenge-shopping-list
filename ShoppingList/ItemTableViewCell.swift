@@ -12,14 +12,19 @@ class ItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var button: UIButton!
+    
+    var delegate: ItemTableViewCellDelegate?
 
     @IBAction func buttonTapped(sender: AnyObject) {
+        if let delegate = delegate {
+            delegate.updateButtonToggleValueChanged(self)
+        }
     }
     
     func updateWithItem(item: Item) {
         itemNameLabel.text = item.name
         updateButton(item.isComplete.boolValue)
-        
+        ItemController.sharedController.saveToPersistentStore()
     }
     
     func updateButton(isComplete: Bool) {
@@ -29,7 +34,8 @@ class ItemTableViewCell: UITableViewCell {
             button.setImage(UIImage(named: "incomplete"), forState: .Normal)
         }
     }
-    
-    
+}
 
+protocol ItemTableViewCellDelegate {
+    func updateButtonToggleValueChanged(sender: ItemTableViewCell)
 }
