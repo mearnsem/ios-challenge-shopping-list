@@ -10,13 +10,12 @@ import UIKit
 
 class ShoppingListTableViewController: UITableViewController {
 
-    var item: Item?
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         tableView.reloadData()
@@ -26,15 +25,15 @@ class ShoppingListTableViewController: UITableViewController {
     // MARK: - IBActions
     
     @IBAction func addButtonPressed(sender: AnyObject) {
+        var itemTextField: UITextField?
         let alertController = UIAlertController(title: "Add Item", message: "Add an item to your shopping list", preferredStyle: .Alert)
-        alertController.addTextFieldWithConfigurationHandler { (textField) in Void() }
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            itemTextField = textField
+        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        let addAction = UIAlertAction(title: "Add", style: .Default) { (actionController) in
-            guard let item = self.item else { return }
-            ItemController.sharedController.addItem(textFields.first, isComplete: false)
-            ItemController.sharedController.saveToPersistentStore()
-            
-            print(ItemController.sharedController.items.count)
+        let addAction = UIAlertAction(title: "Add", style: .Default) { (_) in
+            guard let item = itemTextField?.text else {return}
+            ItemController.sharedController.addItem(item, isComplete: false)
         }
         alertController.addAction(cancelAction)
         alertController.addAction(addAction)
