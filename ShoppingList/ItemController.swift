@@ -16,7 +16,7 @@ class ItemController {
     
     init() {
         self.items = fetchItems()
-        self.items = mockItems()
+//        self.items = mockItems()
     }
     
     func mockItems() -> [Item] {

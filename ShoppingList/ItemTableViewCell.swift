@@ -14,6 +14,7 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet weak var button: UIButton!
     
     var delegate: ItemTableViewCellDelegate?
+    var item: Item?
 
     @IBAction func buttonTapped(sender: AnyObject) {
         if let delegate = delegate {
@@ -24,7 +25,7 @@ class ItemTableViewCell: UITableViewCell {
     func updateWithItem(item: Item) {
         itemNameLabel.text = item.name
         updateButton(item.isComplete.boolValue)
-        ItemController.sharedController.saveToPersistentStore()
+        self.item = item
     }
     
     func updateButton(isComplete: Bool) {

@@ -44,10 +44,9 @@ class ShoppingListTableViewController: UITableViewController, ItemTableViewCellD
     }
     
     func updateButtonToggleValueChanged(sender: ItemTableViewCell) {
-        if let item = item {
-            ItemController.sharedController.buttonToggleValueChanged(item)
-        }
-        
+        guard let item = sender.item else {return}
+        ItemController.sharedController.buttonToggleValueChanged(item)
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -57,13 +56,13 @@ class ShoppingListTableViewController: UITableViewController, ItemTableViewCellD
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as? ItemTableViewCell
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as? ItemTableViewCell else {return ItemTableViewCell()}
 
         let item = ItemController.sharedController.items[indexPath.row]
-        cell?.updateWithItem(item)
-        cell?.delegate = self
+        cell.updateWithItem(item)
+        cell.delegate = self
 
-        return cell ?? ItemTableViewCell()
+        return cell
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -72,7 +71,8 @@ class ShoppingListTableViewController: UITableViewController, ItemTableViewCellD
             ItemController.sharedController.deleteItem(item)
             
 //            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
  
