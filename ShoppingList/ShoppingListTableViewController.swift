@@ -24,7 +24,7 @@ class ShoppingListTableViewController: UITableViewController, ItemTableViewCellD
     @IBAction func addButtonPressed(sender: AnyObject) {
         var itemTextField: UITextField?
         
-        let alertController = UIAlertController(title: "Add Item", message: "Add an item to your shopping list.", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Add Item", message: "Add an item to your shopping list", preferredStyle: .Alert)
         alertController.addTextFieldWithConfigurationHandler { (textField) in
             textField.placeholder = "Item name"
             itemTextField = textField
@@ -67,12 +67,11 @@ class ShoppingListTableViewController: UITableViewController, ItemTableViewCellD
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let item = ItemController.sharedController.items[indexPath.row]
+            let item = ItemController.sharedController.items.removeAtIndex(indexPath.row)
             ItemController.sharedController.deleteItem(item)
             
-//            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            
         }
     }
  

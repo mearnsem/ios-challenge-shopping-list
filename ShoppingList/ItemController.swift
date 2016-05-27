@@ -17,7 +17,7 @@ class ItemController {
     init() {
         self.items = fetchItems()
 //        self.items = mockItems()
-    }
+     }
     
     func mockItems() -> [Item] {
         if let item1 = Item(name: "bananas", isComplete: true),
@@ -40,8 +40,10 @@ class ItemController {
     }
     
     func deleteItem(item: Item) {
-        Stack.sharedStack.managedObjectContext.deleteObject(item)
-        saveToPersistentStore()
+        if let moc = item.managedObjectContext {
+            moc.deleteObject(item)
+            saveToPersistentStore()
+        }
     }
     
     func saveToPersistentStore() {

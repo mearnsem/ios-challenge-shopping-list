@@ -7,7 +7,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Shopping List Table View Controller-->
+        <!--Shopping List-->
         <scene sceneID="oKz-rv-cHm">
             <objects>
                 <tableViewController id="pYX-wT-U59" customClass="ShoppingListTableViewController" customModule="ShoppingList" customModuleProvider="target" sceneMemberID="viewController">
@@ -60,7 +60,7 @@
                             <outlet property="delegate" destination="pYX-wT-U59" id="0sI-q1-rrT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="hGn-Px-gNc">
+                    <navigationItem key="navigationItem" title="Shopping List" id="hGn-Px-gNc">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="K8L-BQ-zxN">
                             <connections>
                                 <action selector="addButtonPressed:" destination="pYX-wT-U59" id="9H4-uH-C82"/>
